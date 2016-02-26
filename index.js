@@ -1,11 +1,11 @@
-var GlobalConfig = function(accoutUrl, devicesConfigUrl){
-    this.accoutUrl = accoutUrl;
+var GlobalConfig = function(accountUrl, devicesConfigUrl){
+    this.accountUrl = accountUrl;
     this.devicesConfigUrl = devicesConfigUrl;
 };
 
-var DeviceConfig = function(codeName, dependenciesPath){
+var DeviceConfig = function(codeName, dependenciesUrl){
     this.codeName = codeName;
-    this.dependenciesPath = dependenciesPath;
+    this.dependenciesUrl = dependenciesUrl;
 };
 
 var DeviceInfo = function(repositories) {
@@ -19,10 +19,10 @@ var DeviceInfo = function(repositories) {
         //TODO
     }
 
-}
+};
 
 var CommitInfo = function() {
     this.title = title;
     this.project = project;
     //TODO
-}
+};
