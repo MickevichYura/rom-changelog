@@ -1,1 +1,14 @@
-# rom-changelog
+# ROM-Changelog
+### How to run?
+* **MacOS or Linux**          
+`DEBUG=myapp:* npm start`
+* **Windows**
+`set DEBUG=myapp:* & npm start`
+* **IntelliJ IDEA (run-configuration)**
+    * *Working directory:* `/your_path/rom-changelog/bin`
+    * *JavaScript file:* `www`
+
+### Useful stuff
+* **IntelliJ IDEA Plugins**
+  * *NodeJS*
+  * *Jade*
