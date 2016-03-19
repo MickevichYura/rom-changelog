@@ -15,3 +15,7 @@
 * **IntelliJ IDEA Plugins**
   * *NodeJS*
   * *Jade*
+* **Links**
+  * *[Jade to HTML](http://html2jade.org/)*
+  * *[HTML to Jade](http://jade-lang.com/)*
+

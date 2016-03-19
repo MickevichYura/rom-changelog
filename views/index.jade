@@ -1,5 +1,35 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to #{title}
+    div.flex-centered
+        ul.list-three.mdl-list
+            li.mdl-list__item.mdl-list__item--three-line
+                span.mdl-list__item-primary-content
+                    i.material-icons.mdl-list__item-avatar person
+                    span First commit
+                    span.mdl-list__item-text-body
+                        | Description text text text
+                        | text text text text text text.
+                span.mdl-list__item-secondary-content
+                    a.mdl-list__item-secondary-action(href='#')
+                        i.material-icons star
+            li.mdl-list__item.mdl-list__item--three-line
+                span.mdl-list__item-primary-content
+                    i.material-icons.mdl-list__item-avatar person
+                    span Second commit
+                    span.mdl-list__item-text-body
+                        | Description text text text
+                        | text text text text text text.
+                span.mdl-list__item-secondary-content
+                    a.mdl-list__item-secondary-action(href='#')
+                        i.material-icons star
+            li.mdl-list__item.mdl-list__item--three-line
+                span.mdl-list__item-primary-content
+                    i.material-icons.mdl-list__item-avatar person
+                    span Third commit
+                    span.mdl-list__item-text-body
+                        | Description text text text
+                        | text text text text text text.
+                span.mdl-list__item-secondary-content
+                    a.mdl-list__item-secondary-action(href='#')
+                        i.material-icons star

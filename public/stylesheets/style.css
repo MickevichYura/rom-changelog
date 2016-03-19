@@ -1,8 +1,10 @@
-body {
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.list-three {
+    width: 650px;
 }
 
-a {
-    color: #00B7FF;
+.flex-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
