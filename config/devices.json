@@ -1,12 +1,12 @@
 [
   {
     "codeName": "hammerheadcaf",
-    "deviceRepoUrl": "https://github.com/CyanogenMod/android_device_lge_hammerhead",
-    "dependenciesUrl": "https://raw.githubusercontent.com/CyanogenMod/android_device_lge_hammerhead/cm-13.0/cm.dependencies"
+    "deviceRepo": "android_device_lge_hammerheadcaf",
+    "dependenciesFile": "cm.dependencies"
   },
   {
     "codeName": "angler",
-    "deviceRepoUrl": "https://github.com/CyanogenMod/android_device_huawei_angler",
-    "dependenciesUrl": "https://raw.githubusercontent.com/CyanogenMod/android_device_huawei_angler/cm-13.0/cm.dependencies"
+    "deviceRepo": "android_device_huawei_angler",
+    "dependenciesFile": "cm.dependencies"
   }
 ]

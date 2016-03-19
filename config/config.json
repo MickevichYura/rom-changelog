@@ -1,4 +1,5 @@
 {
-  "accountUrl": "https://github.com/cyanogenmod",
-  "devicesConfigPath": "D:/Work_tree/rom-changelog/config/devices.json"
+  "account": "cyanogenmod",
+  "devicesConfigPath": "D:/Work_tree/rom-changelog/config/devices.json",
+  "branch": "cm-13.0"
 }

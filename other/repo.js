@@ -4,6 +4,8 @@ var request = require('request');
 /*
  * Some helpful stuff
  */
+var githubRawDataUrl = 'https://raw.githubusercontent.com';
+var githubUrl = 'https://github.com';
 
 function readConfig(configPath, encoding) {
     var config = JSON.parse(fs.readFileSync(configPath, encoding));
@@ -39,9 +41,10 @@ Context.prototype.findDeviceByCodeName = function findDeviceByCodeName(codeName)
 };
 
 Context.prototype.getKernelRepository = function getKernelRepository(codeName, callback) {
-    const device = this.findDeviceByCodeName(codeName);
-    const url = device.dependenciesUrl;
-    const config = this.config;
+    var device = this.findDeviceByCodeName(codeName);
+    var config = this.config;
+    var branch = config.branch;
+    var url = githubRawDataUrl + '/' + config.account + '/' + device.deviceRepo + '/' + branch + '/' + device.dependenciesFile;
 
     request({
         url: url,
@@ -57,26 +60,26 @@ Context.prototype.getKernelRepository = function getKernelRepository(codeName, c
             return console.log('Invalid Status Code Returned:', response.statusCode);
         }
 
-        const repository = body[0].repository;
-        const kernelRepoUrl = config.accountUrl + '/' + repository;
+        var repository = body[0].repository;
+        var kernelRepoUrl = githubUrl + '/' + config.account + '/' + repository;
 
         callback(kernelRepoUrl);
     });
 };
 
 Context.prototype.getDeviceRepository = function getDeviceRepository(codeName) {
-    const device = this.findDeviceByCodeName(codeName);
-    const deviceRepo = device.deviceRepoUrl;
+    var device = this.findDeviceByCodeName(codeName);
+    var url = githubUrl + '/' + this.config.account + '/' + device.deviceRepo;
 
-    return deviceRepo;
+    return url;
 };
 
 Context.prototype.getBaseRepositories = function (codeName, callback) {
-    const currentContext = this;
+    var currentContext = this;
 
     this.getKernelRepository(codeName, function (kernelRepository) {
-        const deviceRepository = currentContext.getDeviceRepository(codeName);
-        const baseRepositories = [kernelRepository, deviceRepository];
+        var deviceRepository = currentContext.getDeviceRepository(codeName);
+        var baseRepositories = [kernelRepository, deviceRepository];
 
         callback(baseRepositories);
     });
@@ -97,9 +100,9 @@ var repoHelper = repoHelper || {};
  * @param encoding
  */
 repoHelper.initLocalContext = function (configPath, encoding) {
-    const config = readConfig(configPath, encoding);
-    const devices = readDevices(config.devicesConfigPath);
-    const context = new Context(config, devices);
+    var config = readConfig(configPath, encoding);
+    var devices = readDevices(config.devicesConfigPath);
+    var context = new Context(config, devices);
 
     return context;
 };
