@@ -16,6 +16,6 @@
   * *NodeJS*
   * *Jade*
 * **Links**
-  * *[Jade to HTML](http://html2jade.org/)*
-  * *[HTML to Jade](http://jade-lang.com/)*
+  * *[Jade to HTML](http://jade-lang.com/)*
+  * *[HTML to Jade](http://html2jade.org/)*
 
