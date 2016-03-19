@@ -10,7 +10,7 @@ function isRouteExists(route) {
         return device.codeName == route;
     });
 
-    return (result.length != 0) ? true : false;
+    return (result.length != 0 || route == '') ? true : false;
 }
 
 /* GET home page. */
@@ -22,7 +22,8 @@ router.get('/*', function (req, res, next) {
     var route = req.url.substr(1);
 
     if (isRouteExists(route)) {
-        res.render('index', {title: route, drawerTitle: route});
+        var drawerTitle = (route == '')? 'CM Changelog' : route;
+        res.render('index', {title: route, drawerTitle: drawerTitle});
     } else {
         var err = new Error('Not Found');
         err.status = 404;
