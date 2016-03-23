@@ -3,7 +3,7 @@ var router = express.Router();
 var repo = require('../other/repo');
 
 const repoHelper = repo.repoHelper;
-const context = repoHelper.initLocalContext('D:/Work_tree/rom-changelog/config/config.json', 'utf8');
+const context = repoHelper.initLocalContext('config/config.json', 'utf8');
 
 function isRouteExists(route) {
     var result = context.devices.filter(function (device) {
