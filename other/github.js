@@ -13,11 +13,12 @@ var github = new GitHubApi({
     }
 });
 
-github.getCommits = function (repoName, account, callback) {
+github.getCommits = function (repositoryInfo, callback) {
 
     github.repos.getCommits({
-        user: account,
-        repo: repoName
+        user: repositoryInfo.account,
+        repo: repositoryInfo.repoName
+        //TODO get commits from custom branch (repositoryInfo.branch)
     }, function (err, res) {
         callback(res);
     });

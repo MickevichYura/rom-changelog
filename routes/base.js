@@ -12,24 +12,25 @@ function isRouteExists(route) {
         return device.codeName == route;
     });
 
-    return (result.length != 0 || route == '') ? true : false;
+    return !!(result.length != 0 || route == '');
 }
 
 /* GET home page. */
 router.get('/*', function (req, res, next) {
     var route = req.url.substr(1);
 
-    context.getBaseRepositories(route, function (baseRepositories) {
-        console.log(baseRepositories)
-        githubHelper.getCommits(baseRepositories[1], "CyanogenMod", function (commits) {
-            console.log(commits)
-        });
-    });
-
     if (isRouteExists(route)) {
         if (route == '') {
             res.render('index', {title: route, drawerTitle: 'CM changelog'});
         } else {
+            
+            context.getBaseRepositories(route, function (baseRepositories) {
+                console.log(baseRepositories);
+                githubHelper.getCommits(baseRepositories[0], function (commits) {
+                    console.log(commits)
+                });
+            });
+
             res.render('device', {title: route, drawerTitle: route});
         }
     } else {

@@ -1,12 +1,12 @@
 [
   {
     "codeName": "hammerheadcaf",
-    "deviceRepo": "android_device_lge_hammerheadcaf",
+    "deviceRepository": "android_device_lge_hammerheadcaf",
     "dependenciesFile": "cm.dependencies"
   },
   {
     "codeName": "angler",
-    "deviceRepo": "android_device_huawei_angler",
+    "deviceRepository": "android_device_huawei_angler",
     "dependenciesFile": "cm.dependencies"
   }
 ]

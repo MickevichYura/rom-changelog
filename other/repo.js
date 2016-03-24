@@ -5,7 +5,6 @@ var request = require('request');
  * Some helpful stuff
  */
 var githubRawDataUrl = 'https://raw.githubusercontent.com';
-var githubUrl = 'https://github.com';
 
 function readConfig(configPath, encoding) {
     var config = JSON.parse(fs.readFileSync(configPath, encoding));
@@ -18,6 +17,18 @@ function readDevices(configPath, encoding) {
 
     return devices;
 }
+
+var RepositoryInfo = function (account, repoName, branch) {
+    var githubUrl = 'https://github.com';
+
+    this.account = account;
+    this.repoName = repoName;
+    this.branch = branch;
+
+    this.getUrl = function () {
+        return githubUrl + '/' + this.account + '/' + this.name;
+    };
+};
 
 /**
  * Main context object
@@ -40,16 +51,15 @@ Context.prototype.findDeviceByCodeName = function findDeviceByCodeName(codeName)
 
 };
 
-Context.prototype.getKernelRepository = function getKernelRepository(codeName, callback) {
+Context.prototype.getDependenciesRepositories = function getKernelRepository(codeName, callback) {
     var device = this.findDeviceByCodeName(codeName);
     var config = this.config;
-    var branch = config.branch;
-    var url = githubRawDataUrl + '/' + config.account + '/' + device.deviceRepo + '/' + branch + '/' + device.dependenciesFile;
+    var url = githubRawDataUrl + '/' + config.account + '/' + device.deviceRepository + '/' + config.branch + '/' + device.dependenciesFile;
 
     request({
         url: url,
         json: true
-    }, function (error, response, body) {
+    }, function (error, response, dependencies) {
         //Check for error
         if (error) {
             return console.log('Error:', error);
@@ -60,26 +70,42 @@ Context.prototype.getKernelRepository = function getKernelRepository(codeName, c
             return console.log('Invalid Status Code Returned:', response.statusCode);
         }
 
-        var repository = body[0].repository;
-        //var kernelRepoUrl = githubUrl + '/' + config.account + '/' + repository;
-        var kernelRepoUrl = repository;
-        callback(kernelRepoUrl);
+        /*
+         * Get info from device dependencies
+         */
+        var repositories = [];
+        dependencies.forEach(function (dependency) {
+            var repositoryName = dependency.repository;
+            var branch = (dependency.branch != null) ? dependency.branch : config.branch;
+            var repositoryInfo = new RepositoryInfo(config.account, repositoryName, branch);
+
+            repositories.push(repositoryInfo);
+        });
+
+        callback(repositories);
+    });
+};
+
+Context.prototype.getKernelRepository = function getKernelRepository(codeName, callback) {
+    this.getDependenciesRepositories(codeName, function (repositories) {
+        callback(repositories[0]);
     });
 };
 
 Context.prototype.getDeviceRepository = function getDeviceRepository(codeName) {
     var device = this.findDeviceByCodeName(codeName);
-    //var url = githubUrl + '/' + this.config.account + '/' + device.deviceRepo;
-    var url = device.deviceRepo;
-    return url;
+    var config = this.config;
+    var repositoryInfo = new RepositoryInfo(config.account, device.deviceRepository, config.branch);
+
+    return repositoryInfo;
 };
 
 Context.prototype.getBaseRepositories = function (codeName, callback) {
     var currentContext = this;
 
-    this.getKernelRepository(codeName, function (kernelRepository) {
+    this.getDependenciesRepositories(codeName, function (dependenciesRepositories) {
         var deviceRepository = currentContext.getDeviceRepository(codeName);
-        var baseRepositories = [kernelRepository, deviceRepository];
+        var baseRepositories = dependenciesRepositories.concat([deviceRepository]);
 
         callback(baseRepositories);
     });
