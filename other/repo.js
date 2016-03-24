@@ -61,16 +61,16 @@ Context.prototype.getKernelRepository = function getKernelRepository(codeName, c
         }
 
         var repository = body[0].repository;
-        var kernelRepoUrl = githubUrl + '/' + config.account + '/' + repository;
-
+        //var kernelRepoUrl = githubUrl + '/' + config.account + '/' + repository;
+        var kernelRepoUrl = repository;
         callback(kernelRepoUrl);
     });
 };
 
 Context.prototype.getDeviceRepository = function getDeviceRepository(codeName) {
     var device = this.findDeviceByCodeName(codeName);
-    var url = githubUrl + '/' + this.config.account + '/' + device.deviceRepo;
-
+    //var url = githubUrl + '/' + this.config.account + '/' + device.deviceRepo;
+    var url = device.deviceRepo;
     return url;
 };
 
