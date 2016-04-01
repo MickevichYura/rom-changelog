@@ -9,7 +9,7 @@ var githubHelper = github.githubHelper;
 function homePageHander(request, response) {
     console.log("Request handler 'home' was called.");
 
-    var content = fs.readFileSync("./views/home.html");
+    var content = fs.readFileSync("client/home.html");
     response.writeHead(200, {"Content-Type": "text/html"});
     response.write(content);
     response.end();
@@ -18,19 +18,29 @@ function homePageHander(request, response) {
 function devicePageHandler(request, response) {
     console.log("Request handler 'device' was called.");
 
-    var codeName = request.url.substr(1);
-
-    context.getBaseRepositories(codeName, function (baseRepositories) {
-        console.log(baseRepositories);
-        githubHelper.getCommits(baseRepositories[0], function (commits) {
-            console.log(commits)
-        });
-    });
-
-    var content = fs.readFileSync("./views/device.html");
+    var content = fs.readFileSync("client/device.html");
     response.writeHead(200, {"Content-Type": "text/html"});
     response.write(content);
     response.end();
+}
+
+function getCommitsHandler(request, response) {
+    console.log("Request handler 'getCommits' was called.");
+
+    //TODO get codeName from query param
+    var codeName = "hammerheadcaf";
+
+    //TODO get date from query param
+    var date;
+
+    context.getBaseRepositories(codeName, function (baseRepositories) {
+        //TODO function to get commits for some date
+        githubHelper.getCommits(baseRepositories[0], function (commits) {
+            response.writeHead(200, {"Content-Type": "application/json; charset=utf-8"});
+            response.write(JSON.stringify(commits));
+            response.end();
+        });
+    });
 }
 
 exports.getHandlers = function () {
@@ -42,6 +52,8 @@ exports.getHandlers = function () {
         var path = '/' + device.codeName;
         handlers[path] = devicePageHandler;
     });
+
+    handlers['/commits'] = getCommitsHandler;
 
     return handlers;
 };

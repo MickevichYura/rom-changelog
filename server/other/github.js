@@ -20,8 +20,14 @@ github.getCommits = function (repositoryInfo, callback) {
         repo: repositoryInfo.repoName
         //TODO get commits from custom branch (repositoryInfo.branch)
     }, function (err, res) {
+        //TODO sent not all commit info from api, but use custom CommitInfo with only necessary fields
         callback(res);
     });
+};
+
+var CommitInfo = function (author) {
+    this.author = author;
+    //TODO etc
 };
 
 exports.githubHelper = github;
