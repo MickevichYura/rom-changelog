@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./app.js"
+    "start": "node ./app.js",
+    "jscs-fix": "jscs --fix ./server/core/resourceProvider.js ./server/core/requestHandlers.js ./server/core/router.js ./server/core/server.js"
   },
   "dependencies": {
     "request": "~2.69.0",

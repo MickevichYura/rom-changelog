@@ -1,6 +1,6 @@
 var server = require('./server/core/server');
-var router = require("./server/core/router");
-var requestHandlers = require("./server/core/requestHandlers");
+var router = require('./server/core/router');
+var requestHandlers = require('./server/core/requestHandlers');
 
 var serverConfig = server.getServerConfig();
 var host = serverConfig.host;
