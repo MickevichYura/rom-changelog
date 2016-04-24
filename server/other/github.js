@@ -14,21 +14,14 @@ var github = new GitHubApi({
 });
 
 github.getCommits = function (repositoryInfo, date, callback) {
-
     github.repos.getCommits({
         user: repositoryInfo.account,
         repo: repositoryInfo.repoName,
         sha: repositoryInfo.branch,
         since: date
     }, function (err, res) {
-        //TODO sent not all commit info from api, but use custom CommitInfo with only necessary fields
         callback(res);
     });
-};
-
-var CommitInfo = function (author) {
-    this.author = author;
-    //TODO etc
 };
 
 exports.githubHelper = github;

@@ -32,10 +32,23 @@ function getCommitsHandler(request, response) {
     var date = query.date;//Format yyyy-MM-dd, example '2016-04-20'
 
     context.getBaseRepositories(codeName, function (baseRepositories) {
-        githubHelper.getCommits(baseRepositories[0], date, function (commits) {
-            response.writeHead(200, {"Content-Type": "application/json; charset=utf-8"});
-            response.write(JSON.stringify(commits));
-            response.end();
+        var count = baseRepositories.length;
+        var commitsPackages = [];
+        response.writeHead(200, {"Content-Type": "application/json; charset=utf-8"});
+
+        baseRepositories.forEach(function (repository) {
+            githubHelper.getCommits(repository, date, function (commits) {
+                commitsPackages.push({
+                    repoName: repository.repoName,
+                    commits: commits
+                });
+                count--;
+
+                if(count == 0) {
+                    response.write(JSON.stringify(commitsPackages));
+                    response.end();
+                }
+            });
         });
     });
 }
