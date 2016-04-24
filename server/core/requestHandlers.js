@@ -25,7 +25,7 @@ function devicePageHandler(request, response) {
 }
 
 function getCommitsHandler(request, response) {
-    console.log('Request handler \'commits\' was called.');
+    console.log('Request handler \'getCommits\' was called.');
 
     var query = require('url').parse(request.url, true).query;
     var codeName = query.codeName;
