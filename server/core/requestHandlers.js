@@ -25,17 +25,14 @@ function devicePageHandler(request, response) {
 }
 
 function getCommitsHandler(request, response) {
-    console.log("Request handler 'getCommits' was called.");
+    console.log("Request handler 'commits' was called.");
 
-    //TODO get codeName from query param
-    var codeName = "hammerheadcaf";
-
-    //TODO get date from query param
-    var date;
+    var query = require('url').parse(request.url, true).query;    
+    var codeName = query.codeName;        
+    var date = query.date;//Format yyyy-MM-dd, example '2016-04-20'
 
     context.getBaseRepositories(codeName, function (baseRepositories) {
-        //TODO function to get commits for some date
-        githubHelper.getCommits(baseRepositories[0], function (commits) {
+        githubHelper.getCommits(baseRepositories[0], date, function (commits) {
             response.writeHead(200, {"Content-Type": "application/json; charset=utf-8"});
             response.write(JSON.stringify(commits));
             response.end();

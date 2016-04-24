@@ -13,12 +13,13 @@ var github = new GitHubApi({
     }
 });
 
-github.getCommits = function (repositoryInfo, callback) {
+github.getCommits = function (repositoryInfo, date, callback) {
 
     github.repos.getCommits({
         user: repositoryInfo.account,
-        repo: repositoryInfo.repoName
-        //TODO get commits from custom branch (repositoryInfo.branch)
+        repo: repositoryInfo.repoName,
+        sha: repositoryInfo.branch,
+        since: date
     }, function (err, res) {
         //TODO sent not all commit info from api, but use custom CommitInfo with only necessary fields
         callback(res);
