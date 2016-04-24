@@ -1,15 +1,15 @@
-var GitHubApi = require("github");
+var GitHubApi = require('github');
 
 var github = new GitHubApi({
     // required
-    version: "3.0.0",
+    version: '3.0.0',
     // optional
     debug: false,
-    protocol: "https",
-    host: "api.github.com",
+    protocol: 'https',
+    host: 'api.github.com',
     timeout: 5000,
     headers: {
-        "user-agent": "ROM-changelog"
+        'user-agent': 'ROM-changelog'
     }
 });
 

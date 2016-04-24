@@ -1,5 +1,5 @@
-var http = require("http");
-var url = require("url");
+var http = require('http');
+var url = require('url');
 
 /*
  * Default server configuration
@@ -37,11 +37,11 @@ exports.getServerConfig = function () {
 exports.start = function (host, port, route, handle) {
     function onRequest(request, response) {
         var pathname = url.parse(request.url).pathname;
-        console.log("Request for " + pathname + " received.");
+        console.log('Request for ' + pathname + ' received.');
         route(handle, pathname, request, response);
     }
 
     http.createServer(onRequest).listen(port, host);
-    console.log("Server has started and listening on : " + host + ":" + port);
+    console.log('Server has started and listening on : ' + host + ':' + port);
 
 };
