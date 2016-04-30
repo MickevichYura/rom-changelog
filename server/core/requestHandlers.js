@@ -31,26 +31,34 @@ function getCommitsHandler(request, response) {
     var codeName = query.codeName;
     var date = query.date;//Format yyyy-MM-dd, example '2016-04-20'
 
-    context.getBaseRepositories(codeName, function (baseRepositories) {
-        var count = baseRepositories.length;
-        var commitsPackages = [];
-        response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+    if (codeName === undefined || date === undefined) {
+        console.log('Incorrect query for commits API');
+        var content = fs.readFileSync('client/error.html');
+        response.writeHead(404, {'Content-Type': 'text/html'});
+        response.write(content);
+        response.end();
+    } else {
+        context.getBaseRepositories(codeName, function (baseRepositories) {
+            var count = baseRepositories.length;
+            var commitsPackages = [];
+            response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
 
-        baseRepositories.forEach(function (repository) {
-            githubHelper.getCommits(repository, date, function (commits) {
-                commitsPackages.push({
-                    repoName: repository.repoName,
-                    commits: commits
+            baseRepositories.forEach(function (repository) {
+                githubHelper.getCommits(repository, date, function (commits) {
+                    commitsPackages.push({
+                        repoName: repository.repoName,
+                        commits: commits
+                    });
+                    count--;
+
+                    if (count == 0) {
+                        response.write(JSON.stringify(commitsPackages));
+                        response.end();
+                    }
                 });
-                count--;
-
-                if(count == 0) {
-                    response.write(JSON.stringify(commitsPackages));
-                    response.end();
-                }
             });
         });
-    });
+    }
 }
 
 exports.getHandlers = function () {
