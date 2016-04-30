@@ -11,18 +11,39 @@
     <title>CM Changelog</title>
     <link rel="shortcut icon" type="image/png" href="images/icons/favicon.ico">
 
-
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap Theme CSS -->
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
+    <!-- Bootstrap Datepicker CSS -->
+    <link href="css/bootstrap-datepicker3.min.css" rel="stylesheet">
+    <link href="css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet">
+
     <!-- Sidebar styles-->
     <link data-dump-line-numbers="all" rel="stylesheet/less" type="text/css" href="less/sidebar.less">
 
     <!-- Less support -->
     <script src="js/less.min.js" data-poll="1000" data-relative-urls="true"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/angular.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Datepicker JavaScript -->
+    <script src="js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Sidebar JavaScript-->
+    <script src="js/initializer.js"></script>
+
+    <!-- Controllers JavaScript-->
+    <script src="js/core.app.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,49 +71,50 @@
         </nav>
         <!-- /#sidebar-wrapper -->
 
+
         <!-- Page Content -->
-        <div id="page-content-wrapper">
+        <div id="page-content-wrapper" ng-controller="mainController">
             <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
                 <span class="hamb-top"></span>
                 <span class="hamb-middle"></span>
                 <span class="hamb-bottom"></span>
             </button>
-            <div class="container" ng-controller="mainController">
+            <div class="container">
                 <div class="row">
-                    <div id="into"
-                         class="col-lg-8 col-lg-offset-2"
-                         ng-if="isRootPage">
+                    <div id="intro" class="col-lg-8 col-lg-offset-2" ng-if="isRootPage">
                         <h1 class="page-header">CyanogenMod Changelog</h1>
                         <p class="lead"> What could be easier ?
                             <br>Just select your device from the sidebar to know changelog.
                             <br>You can find latest sources <a href="https://github.com/MickevichYura/rom-changelog">here</a></p>
                     </div>
+
+                    <div id="content" ng-hide="isRootPage">
+                        <div id="date" class="col-lg-4 col-lg-offset-4" ng-controller="dateController">
+                            <div class="input-group date">
+                                <input type="text" class="form-control" style="text-align:center">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                            </div>
+                            <script>
+                                initializer.initDatePicker();
+                            </script>
+                        </div>
+                        <div id="commits" class="col-lg-8 col-lg-offset-2" ng-controller="commitsController">
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#page-content-wrapper -->
+
 
     </div>
     <!-- /#wrapper -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/angular.min.js"></script>
-
-    <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Sidebar JavaScript-->
-    <script src="js/sidebar.js"></script>
-
-    <!-- Sidebar JavaScript-->
-    <script src="js/custom.js"></script>
-
     <!-- Menu Toggle Script -->
     <script>
-        sidebar.init();
+        initializer.initSideBar();
     </script>
 
 </body>

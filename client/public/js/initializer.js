@@ -1,6 +1,6 @@
-var sidebar = sidebar || {};
+var initializer = initializer || {};
 
-sidebar.init = function () {
+initializer.initSideBar = function () {
     $(document).ready(function () {
         var trigger = $('.hamburger'),
             overlay = $('.overlay'),
@@ -27,6 +27,17 @@ sidebar.init = function () {
 
         $('[data-toggle="offcanvas"]').click(function () {
             $('#wrapper').toggleClass('toggled');
+        });
+    });
+};
+
+initializer.initDatePicker = function () {
+    $(document).ready(function () {
+        $('.input-group.date').datepicker({
+            format: "yyyy-mm-dd",
+            clearBtn: true,
+            autoclose: true,
+            todayHighlight: true
         });
     });
 };
