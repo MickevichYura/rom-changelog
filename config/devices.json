@@ -1,7 +1,7 @@
 [
   {
     "codeName": "hammerheadcaf",
-    "displayedName": "Nexus 5 CAF",
+    "displayedName": "Nexus 5",
     "deviceRepository": "android_device_lge_hammerheadcaf",
     "dependenciesFile": "cm.dependencies"
   },

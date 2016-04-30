@@ -15,15 +15,6 @@ function rootPageHander(request, response) {
     response.end();
 }
 
-function devicePageHandler(request, response) {
-    console.log('Request handler \'device\' was called.');
-
-    var content = fs.readFileSync('client/device.html');
-    response.writeHead(200, {'Content-Type': 'text/html'});
-    response.write(content);
-    response.end();
-}
-
 function getCommitsHandler(request, response) {
     console.log('Request handler \'getCommits\' was called.');
 
@@ -73,12 +64,6 @@ exports.getHandlers = function () {
     var handlers = {};
 
     handlers['/'] = rootPageHander;
-
-    context.devices.forEach(function (device) {
-        var path = '/' + device.codeName;
-        handlers[path] = devicePageHandler;
-    });
-
     handlers['/commits'] = getCommitsHandler;
     handlers['/devices'] = getDevices;
 
