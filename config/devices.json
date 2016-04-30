@@ -1,11 +1,13 @@
 [
   {
     "codeName": "hammerheadcaf",
+    "displayedName": "Nexus 5 CAF",
     "deviceRepository": "android_device_lge_hammerheadcaf",
     "dependenciesFile": "cm.dependencies"
   },
   {
     "codeName": "angler",
+    "displayedName": "Nexus 6P",
     "deviceRepository": "android_device_huawei_angler",
     "dependenciesFile": "cm.dependencies"
   }

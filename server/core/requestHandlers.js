@@ -61,6 +61,14 @@ function getCommitsHandler(request, response) {
     }
 }
 
+function getDevices(request, response) {
+    var devices = context.devices !== undefined ? context.devices : [];
+
+    response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+    response.write(JSON.stringify(devices));
+    response.end();
+};
+
 exports.getHandlers = function () {
     var handlers = {};
 
@@ -72,6 +80,7 @@ exports.getHandlers = function () {
     });
 
     handlers['/commits'] = getCommitsHandler;
+    handlers['/devices'] = getDevices;
 
     return handlers;
 };
