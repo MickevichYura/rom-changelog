@@ -6,10 +6,10 @@ const repoHelper = repo.repoHelper;
 const context = repoHelper.initLocalContext('config/config.json', 'utf8');
 var githubHelper = github.githubHelper;
 
-function homePageHander(request, response) {
+function rootPageHander(request, response) {
     console.log('Request handler \'home\' was called.');
 
-    var content = fs.readFileSync('client/home.html');
+    var content = fs.readFileSync('client/index.html');
     response.writeHead(200, {'Content-Type': 'text/html'});
     response.write(content);
     response.end();
@@ -64,7 +64,7 @@ function getCommitsHandler(request, response) {
 exports.getHandlers = function () {
     var handlers = {};
 
-    handlers['/'] = homePageHander;
+    handlers['/'] = rootPageHander;
 
     context.devices.forEach(function (device) {
         var path = '/' + device.codeName;
