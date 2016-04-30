@@ -33,11 +33,15 @@ initializer.initSideBar = function () {
 
 initializer.initDatePicker = function () {
     $(document).ready(function () {
-        $('.input-group.date').datepicker({
-            format: "yyyy-mm-dd",
+        var selector = '.input-group.date';
+
+        $(selector).datepicker({
+            format: "dd-mm-yyyy",
             clearBtn: true,
             autoclose: true,
-            todayHighlight: true
+            todayHighlight: true,
+            enableOnReadonly: true
         });
+        $(selector).datepicker('setDate', new Date());
     });
 };

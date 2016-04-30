@@ -24,6 +24,9 @@
     <!-- Sidebar styles-->
     <link data-dump-line-numbers="all" rel="stylesheet/less" type="text/css" href="less/sidebar.less">
 
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+
     <!-- Less support -->
     <script src="js/less.min.js" data-poll="1000" data-relative-urls="true"></script>
 
@@ -90,8 +93,9 @@
 
                     <div id="content" ng-hide="isRootPage">
                         <div id="date" class="col-lg-4 col-lg-offset-4" ng-controller="dateController">
-                            <div class="input-group date">
-                                <input type="text" class="form-control" style="text-align:center">
+                            <div class="input-group date" data-provide="datepicker">
+                                <input type="text" class="form-control custom-datepicker" readonly>
+                                <input id="stored-date" type="date" hidden>
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                             </div>
                             <script>
