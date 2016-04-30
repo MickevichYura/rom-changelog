@@ -1,4 +1,4 @@
-var app = angular.module('coreApp', []);
+var app = angular.module('coreApp', ['ui.bootstrap.datetimepicker']);
 
 app.controller('sidebarController', function ($scope, $http) {
     var url = '/devices';
@@ -16,17 +16,16 @@ app.controller('sidebarController', function ($scope, $http) {
 });
 
 app.controller('mainController', function ($scope, $location) {
+    //Handle url changing
     $scope.$watch(function () {
         return $location.path();
     }, function (state) {
         $scope.isRootPage = state === '';
     });
-});
 
-app.controller('dateController', function ($scope) {
+    //Set default date
+    $scope.selectedDate = new Date();
     
-});
-
-app.controller('commitsController', function ($scope) {
+    
 
 });
