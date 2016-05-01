@@ -3,3 +3,12 @@
     font-size: 25px;
     color: #262626 !important;
 }
+
+#commits {
+    padding: 20px;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}

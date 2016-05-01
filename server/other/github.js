@@ -13,6 +13,13 @@ var github = new GitHubApi({
     }
 });
 
+// If api is blocked for anonymous user
+// github.authenticate({
+//     type: "basic",
+//     username: "username",
+//     password: "password"
+// });
+
 github.getCommits = function (repositoryInfo, date, callback) {
     github.repos.getCommits({
         user: repositoryInfo.account,

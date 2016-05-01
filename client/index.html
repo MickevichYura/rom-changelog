@@ -87,7 +87,7 @@
             </button>
             <div class="container">
                 <div class="row">
-                    <div id="intro" class="col-lg-8 col-lg-offset-2" ng-if="isRootPage">
+                    <div id="intro" class="col-lg-8 col-centered" ng-if="isRootPage">
                         <h1 class="page-header">CyanogenMod Changelog</h1>
                         <p class="lead"> What could be easier ?
                             <br>Just select your device from the sidebar to know changelog.
@@ -95,7 +95,7 @@
                     </div>
 
                     <div id="content" ng-hide="isRootPage">
-                        <div id="date" class="col-lg-4 col-lg-offset-4">
+                        <div id="date" class="col-lg-4 col-centered">
                             <div class="dropdown">
                                 <a id='dropdown-btn' class="dropdown-toggle" role="button" data-toggle="dropdown">
                                     <div class="input-group">
@@ -104,21 +104,38 @@
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <datetimepicker ng-model="selectedDate" datetimepicker-config="{startView:'day',minView:'day', dropdownSelector: '#dropdown-btn'}" />
+                                    <datetimepicker ng-model="selectedDate" ng-change="getCommitsPackages()" datetimepicker-config="{startView:'day',minView:'day', dropdownSelector: '#dropdown-btn'}" />
                                 </ul>
                             </div>
                         </div>
-                        <div id="commits" class="col-lg-8 col-lg-offset-2">
-
+                        <div id="commits" class="col-lg-8 col-centered">
+                            <div class="list-group"
+                                 ng-if="hasChanges"
+                                 ng-repeat="package in commitsPackages">
+                                <div class="list-group-item list-group-item-info"
+                                     ng-if="package.commits !== undefined && package.commits.length !== 0">
+                                    <h5 class="list-group-item-heading">{{package.repoName}}</h5>
+                                    <div class="list-group">
+                                        <a ng-repeat="commit in package.commits"
+                                           href="{{commit.html_url}}"
+                                           class="list-group-item list-group-item-success">
+                                            <h6 class="list-group-item-heading">{{ commit.commit.message | limitTo : 50 : 0}}</h6>
+                                            <p class="list-group-item-text">{{ commit.commit.message | limitTo : 150 : 50}}</p>
+                                            <p class="list-group-item-text"><b>@{{commit.author.login !== undefined ? commit.author.login : 'unregistered'}}{{' (' + commit.commit.author.name + ')'}}</b></p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-info" ng-if="!hasChanges">
+                                <div class="panel-heading">Sorry...</div>
+                                <div class="panel-body">No changes for this date</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- /#page-content-wrapper -->
-
-
+        <!-- /#page-content-wrapper -->
     </div>
     <!-- /#wrapper -->
 
