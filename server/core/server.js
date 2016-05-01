@@ -4,7 +4,7 @@ var url = require('url');
 /*
  * Default server configuration
  */
-var defaultHost = process.env.HOST || '127.0.0.1';
+var defaultHost = process.env.HOST;
 var defaultPort = process.env.PORT || 3000;
 
 var ServerConfig = function (host, port) {
