@@ -14,11 +14,14 @@ var github = new GitHubApi({
 });
 
 // If api is blocked for anonymous user
-// github.authenticate({
-//     type: "basic",
-//     username: "username",
-//     password: "password"
-// });
+var clientId = process.env.CLIENT_ID;
+var clientSecret = process.env.CLIENT_SECRET;
+
+github.authenticate({
+    type: "oauth",
+    key: clientId,
+    secret: clientSecret
+});
 
 github.getCommits = function (repositoryInfo, date, callback) {
     github.repos.getCommits({
