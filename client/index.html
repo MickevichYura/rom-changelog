@@ -74,8 +74,7 @@
                     <a href="{{'#' + device.codeName}}"><i class="fa fa-fw fa-mobile"></i> {{device.displayedName}}</a>
                 </li>
             </ul>
-        </nav>
-        <!-- /#sidebar-wrapper -->
+        </nav><!-- /#sidebar-wrapper -->
 
 
         <!-- Page Content -->
@@ -85,6 +84,7 @@
                 <span class="hamb-middle"></span>
                 <span class="hamb-bottom"></span>
             </button>
+
             <div class="container">
                 <div class="row">
                     <div id="intro" class="col-lg-8 col-centered" ng-if="isRootPage">
@@ -92,7 +92,7 @@
                         <p class="lead"> What could be easier ?
                             <br>Just select your device from the sidebar to know changelog.
                             <br>You can find latest sources <a href="https://github.com/MickevichYura/rom-changelog">here</a></p>
-                    </div>
+                    </div><!-- /#intro -->
 
                     <div id="content" ng-hide="isRootPage">
                         <div id="date" class="col-lg-4 col-centered">
@@ -107,7 +107,7 @@
                                     <datetimepicker ng-model="selectedDate" ng-change="getCommitsPackages()" datetimepicker-config="{startView:'day',minView:'day', dropdownSelector: '#dropdown-btn'}" />
                                 </ul>
                             </div>
-                        </div>
+                        </div><!-- /#date -->
                         <div id="commits" class="col-lg-8 col-centered">
                             <div class="list-group"
                                  ng-if="hasChanges"
@@ -125,19 +125,20 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>
+                            </div><!-- /#commits -->
                             <div class="panel panel-info" ng-if="!hasChanges">
                                 <div class="panel-heading">Sorry...</div>
                                 <div class="panel-body">No changes for this date</div>
                             </div>
                         </div>
-                    </div>
+                    </div><!-- /#content -->
                 </div>
             </div>
-        </div>
-        <!-- /#page-content-wrapper -->
-    </div>
-    <!-- /#wrapper -->
+
+        </div><!-- /#page-content-wrapper -->
+
+    </div><!-- /#wrapper -->
+
 
     <!-- Menu Toggle Script -->
     <script>

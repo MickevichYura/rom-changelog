@@ -44,11 +44,12 @@ app.controller('mainController', function ($scope, $location, $http) {
         }
     };
 
-    $scope.hasChanges = false;
     function checkForChanges(commitsPackages) {
         commitsPackages.forEach(function (commitPackage){
             if(commitPackage.commits !== undefined && commitPackage.commits.length !== 0) {
                 $scope.hasChanges = true;
+            } else {
+                $scope.hasChanges = false;
             }
         });
     }
