@@ -124,6 +124,7 @@
                                     <div class="list-group">
                                         <a ng-repeat="commit in package.commits"
                                            href="{{commit.html_url}}"
+                                           target="_blank"
                                            class="list-group-item list-group-item-success">
                                             <h6 class="list-group-item-heading">{{ commit.commit.message | split : '\n\n' : 0}}</h6>
                                             <p class="list-group-item-text">{{ commit.commit.message | split : '\n\n' : 1}}</p>
