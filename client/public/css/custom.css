@@ -13,3 +13,7 @@
     float: none;
     margin: 0 auto;
 }
+
+#loading-bar {
+    padding: 20px;
+}

@@ -28,6 +28,8 @@ app.controller('mainController', function ($scope, $location, $http) {
     $scope.selectedDate = new Date();
 
     $scope.getCommitsPackages = function() {
+        $scope.$emit('LOADING_STARTED');
+
         var codeName = $location.url().substr(1);
         var dateString = moment($scope.selectedDate).format('YYYY-MM-DD');
 
@@ -40,17 +42,36 @@ app.controller('mainController', function ($scope, $location, $http) {
             }).then(function (response) {
                 $scope.commitsPackages = response.data;
                 checkForChanges(response.data);
+                $scope.$emit('LOADING_FINISHED');
             });
         }
     };
 
     function checkForChanges(commitsPackages) {
         commitsPackages.forEach(function (commitPackage){
-            if(commitPackage.commits !== undefined && commitPackage.commits.length !== 0) {
-                $scope.hasChanges = true;
-            } else {
-                $scope.hasChanges = false;
-            }
+            $scope.hasChanges = commitPackage.commits !== undefined && commitPackage.commits.length !== 0;
         });
+    }
+
+    $scope.$on('LOADING_STARTED', function () {
+        $scope.loading = true;
+    });
+
+    $scope.$on('LOADING_FINISHED', function () {
+        $scope.loading = false;
+    });
+
+});
+
+app.filter('split', function() {
+    return function(input, splitChar, splitIndex) {
+        var result = '';
+
+        var tokens = input.split(splitChar);
+        if(splitIndex >= 0 && splitIndex < tokens.length) {
+            result = tokens[splitIndex];
+        }
+
+        return result;
     }
 });
