@@ -74,7 +74,7 @@
                     <a href="{{'#' + device.codeName}}"><i class="fa fa-fw fa-mobile"></i> {{device.displayedName}}</a>
                 </li>
             </ul>
-        </nav><!-- /#sidebar-wrapper -->
+        </nav><!-- #sidebar-wrapper -->
 
 
         <!-- Page Content -->
@@ -95,6 +95,7 @@
                     </div><!-- /#intro -->
 
                     <div id="content" ng-hide="isRootPage">
+
                         <div id="date" class="col-lg-4 col-centered">
                             <div class="dropdown">
                                 <a id='dropdown-btn' class="dropdown-toggle" role="button" data-toggle="dropdown">
@@ -107,8 +108,13 @@
                                     <datetimepicker ng-model="selectedDate" ng-change="getCommitsPackages()" datetimepicker-config="{startView:'day',minView:'day', dropdownSelector: '#dropdown-btn'}" />
                                 </ul>
                             </div>
-                        </div><!-- /#date -->
-                        <div id="commits" class="col-lg-8 col-centered">
+                        </div><!-- #date -->
+
+                        <div id="loading-bar" class="col-lg-9 col-centered" ng-show="loading">
+                            <div class="alert alert-info">Loading...</div>
+                        </div>
+
+                        <div id="commits" class="col-lg-9 col-centered" ng-hide="loading">
                             <div class="list-group"
                                  ng-if="hasChanges"
                                  ng-repeat="package in commitsPackages">
@@ -119,25 +125,30 @@
                                         <a ng-repeat="commit in package.commits"
                                            href="{{commit.html_url}}"
                                            class="list-group-item list-group-item-success">
-                                            <h6 class="list-group-item-heading">{{ commit.commit.message | limitTo : 50 : 0}}</h6>
-                                            <p class="list-group-item-text">{{ commit.commit.message | limitTo : 150 : 50}}</p>
+                                            <h6 class="list-group-item-heading">{{ commit.commit.message | split : '\n\n' : 0}}</h6>
+                                            <p class="list-group-item-text">{{ commit.commit.message | split : '\n\n' : 1}}</p>
                                             <p class="list-group-item-text"><b>@{{commit.author.login !== undefined ? commit.author.login : 'unregistered'}}{{' (' + commit.commit.author.name + ')'}}</b></p>
                                         </a>
                                     </div>
                                 </div>
-                            </div><!-- /#commits -->
+                            </div>
+
                             <div class="panel panel-info" ng-if="!hasChanges">
                                 <div class="panel-heading">Sorry...</div>
                                 <div class="panel-body">No changes for this date</div>
                             </div>
-                        </div>
-                    </div><!-- /#content -->
-                </div>
-            </div>
 
-        </div><!-- /#page-content-wrapper -->
+                        </div><!-- #commits -->
 
-    </div><!-- /#wrapper -->
+                    </div><!-- #content -->
+
+                </div><!-- .row -->
+
+            </div><!-- .container -->
+
+        </div><!-- #page-content-wrapper -->
+
+    </div><!-- #wrapper -->
 
 
     <!-- Menu Toggle Script -->
