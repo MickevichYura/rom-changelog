@@ -6,6 +6,7 @@
 
 #commits {
     padding: 20px;
+    word-wrap:break-word;
 }
 
 .col-centered {

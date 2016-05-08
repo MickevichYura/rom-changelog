@@ -74,7 +74,7 @@
                     <a href="{{'#' + device.codeName}}"><i class="fa fa-fw fa-mobile"></i> {{device.displayedName}}</a>
                 </li>
             </ul>
-        </nav><!-- /#sidebar-wrapper -->
+        </nav><!-- #sidebar-wrapper -->
 
 
         <!-- Page Content -->
@@ -95,6 +95,7 @@
                     </div><!-- /#intro -->
 
                     <div id="content" ng-hide="isRootPage">
+
                         <div id="date" class="col-lg-4 col-centered">
                             <div class="dropdown">
                                 <a id='dropdown-btn' class="dropdown-toggle" role="button" data-toggle="dropdown">
@@ -107,7 +108,8 @@
                                     <datetimepicker ng-model="selectedDate" ng-change="getCommitsPackages()" datetimepicker-config="{startView:'day',minView:'day', dropdownSelector: '#dropdown-btn'}" />
                                 </ul>
                             </div>
-                        </div><!-- /#date -->
+                        </div><!-- #date -->
+
                         <div id="commits" class="col-lg-8 col-centered">
                             <div class="list-group"
                                  ng-if="hasChanges"
@@ -125,19 +127,24 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div><!-- /#commits -->
+                            </div>
+
                             <div class="panel panel-info" ng-if="!hasChanges">
                                 <div class="panel-heading">Sorry...</div>
                                 <div class="panel-body">No changes for this date</div>
                             </div>
-                        </div>
-                    </div><!-- /#content -->
-                </div>
-            </div>
 
-        </div><!-- /#page-content-wrapper -->
+                        </div><!-- #commits -->
 
-    </div><!-- /#wrapper -->
+                    </div><!-- #content -->
+
+                </div><!-- .row -->
+
+            </div><!-- .container -->
+
+        </div><!-- #page-content-wrapper -->
+
+    </div><!-- #wrapper -->
 
 
     <!-- Menu Toggle Script -->
