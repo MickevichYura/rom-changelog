@@ -34,11 +34,11 @@ exports.getServerConfig = function () {
     return new ServerConfig(host, port);
 };
 
-exports.start = function (host, port, route, handle) {
+exports.start = function (host, port, route, handlers) {
     function onRequest(request, response) {
         var pathname = url.parse(request.url).pathname;
         console.log('Request for ' + pathname + ' received.');
-        route(handle, pathname, request, response);
+        route(handlers, pathname, request, response);
     }
 
     http.createServer(onRequest).listen(port, host);

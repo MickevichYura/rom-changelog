@@ -22,7 +22,7 @@ function getCommitsHandler(request, response) {
     var codeName = query.codeName;
     var date = query.date;//Format yyyy-MM-dd, example '2016-04-20'
 
-    if (codeName === undefined || date === undefined) {
+    if (!isValidCodeName(codeName) || date === undefined) {
         console.log('Incorrect query for commits API');
         var content = fs.readFileSync('client/error.html');
         response.writeHead(404, {'Content-Type': 'text/html'});
@@ -52,13 +52,27 @@ function getCommitsHandler(request, response) {
     }
 }
 
+function isValidCodeName(codeName) {
+    var result = false;
+
+    if(codeName !== undefined) {
+        context.devices.forEach(function (device) {
+           if(device.codeName === codeName) {
+               result = true;
+           }
+        });
+    }
+
+    return result;
+}
+
 function getDevices(request, response) {
     var devices = context.devices !== undefined ? context.devices : [];
 
     response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
     response.write(JSON.stringify(devices));
     response.end();
-};
+}
 
 exports.getHandlers = function () {
     var handlers = {};

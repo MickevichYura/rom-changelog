@@ -43,6 +43,9 @@ app.controller('mainController', function ($scope, $location, $http) {
                 $scope.commitsPackages = response.data;
                 checkForChanges(response.data);
                 $scope.$emit('LOADING_FINISHED');
+            }, function (err) {
+                $scope.hasChanges = false;
+                $scope.$emit('LOADING_FINISHED');
             });
         }
     };
